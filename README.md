@@ -72,12 +72,8 @@ import { Text } from 'react-feature-toggler';
 function App() {
     return (
         <React.Fragment>
-            <h1>
-                <Text textKey="greeting" />
-            </h1>
-            <h2>
-                <Text textKey="welcome.message" />
-            </h2>
+            <Text as="h1" textKey="greeting" />
+            <Text as="p" textKey="welcome.message" />
         </React.Fragment>
     );
 }

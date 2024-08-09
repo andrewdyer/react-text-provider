@@ -38,4 +38,18 @@ describe('Text', () => {
 
         expect(screen.getByText('welcome.nonexistent')).toBeInTheDocument();
     });
+
+    test('should render as h1 tag when as prop is h1', () => {
+        render(<Text as="h1" textKey="greeting" />, { wrapper });
+
+        const element = screen.getByText('Hello, World!');
+        expect(element.tagName).toBe('H1');
+    });
+
+    test('should render as p tag when as prop is p', () => {
+        render(<Text as="p" textKey="greeting" />, { wrapper });
+
+        const element = screen.getByText('Hello, World!');
+        expect(element.tagName).toBe('P');
+    });
 });
