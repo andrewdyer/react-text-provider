@@ -10,6 +10,121 @@ To install this package use npm:
 npm install @your-scope/react-package-template
 ```
 
+## Usage
+
+### Define Your Texts
+
+First, define your text configuration in a separate file. This configuration will store all the text strings your app needs:
+
+```ts
+// texts.ts
+export const texts = {
+    greeting: 'Hello, World!',
+    welcome: {
+        message: 'Welcome to our application'
+    }
+};
+```
+
+### Inside React Components
+
+Wrap your main application component with the `TextProvider` to make the texts available throughout your app:
+
+```tsx
+// index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { TextProvider } from '@your-scope/react-package-template';
+import App from './App';
+import { texts } from './texts';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+    <TextProvider texts={texts}>
+        <App />
+    </TextProvider>
+);
+```
+
+Then use the `useText` hook to retrieve text strings in your React components:
+
+```tsx
+// App.tsx
+import React from 'react';
+import { useText } from 'react-feature-toggler';
+
+function App() {
+    const greeting = useText('greeting');
+
+    return <h1>{greeting}</h1>;
+}
+
+export default App;
+```
+
+Alternatively, for components that render a lot of text you can use the `Text` component to streamline the process:
+
+```tsx
+// App.tsx
+import React from 'react';
+import { Text } from 'react-feature-toggler';
+
+function App() {
+    return (
+        <React.Fragment>
+            <h1>
+                <Text textKey="greeting" />
+            </h1>
+            <h2>
+                <Text textKey="welcome.message" />
+            </h2>
+        </React.Fragment>
+    );
+}
+
+export default App;
+```
+
+### Outside React Components
+
+If you need to use texts outside of React components (e.g., in validation schemas), initialize your text configuration globally early in your app’s lifecycle:
+
+```ts
+// initializeTexts.ts
+import { initGlobalTexts } from '@your-scope/react-package-template';
+import { texts } from './texts';
+
+initGlobalTexts(texts);
+```
+
+Then, import this initialization in your entry file:
+
+```tsx
+// index.tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './initializeTexts';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+        <App />
+    document.getElementById('root')
+);
+```
+
+Then to access text strings in non-React code (e.g., validation schemas, utility functions), use the `getText` helper function.
+
+```ts
+// someUtility.ts
+import { getText } from '@your-scope/react-package-template';
+
+function validate() {
+    const errorMessage = getText('validation.error');
+    // Use errorMessage in validation logic
+}
+```
+
 ## Local Development
 
 For local development, use Yalc to install this package in your project.
