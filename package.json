@@ -1,7 +1,7 @@
 {
     "name": "react-text-provider",
     "description": "A package for managing and accessing text strings throughout your application",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
     "types": "dist/types/index.d.ts",
@@ -31,7 +31,7 @@
     "author": "Andrew Dyer (https://github.com/andrewdyer)",
     "repository": {
         "type": "git",
-        "url": "https://github.com/andrewdyer/react-package-template.git"
+        "url": "https://github.com/andrewdyer/react-text-provider.git"
     },
     "license": "MIT",
     "devDependencies": {
