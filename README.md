@@ -1,13 +1,13 @@
-# React Package Template
+# React Text Provider
 
-A template for creating React packages.
+A package for managing and accessing text strings throughout your application.
 
 ## Getting Started
 
 To install this package use npm:
 
 ```bash
-npm install @your-scope/react-package-template
+npm install react-text-provider
 ```
 
 ## Usage
@@ -34,7 +34,7 @@ Wrap your main application component with the `TextProvider` to make the texts a
 // index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { TextProvider } from '@your-scope/react-package-template';
+import { TextProvider } from 'react-text-provider';
 import App from './App';
 import { texts } from './texts';
 
@@ -91,7 +91,7 @@ If you need to use texts outside of React components (e.g., in validation schema
 
 ```ts
 // initializeTexts.ts
-import { initGlobalTexts } from '@your-scope/react-package-template';
+import { initGlobalTexts } from 'react-text-provider';
 import { texts } from './texts';
 
 initGlobalTexts(texts);
@@ -117,7 +117,7 @@ Then to access text strings in non-React code (e.g., validation schemas, utility
 
 ```ts
 // someUtility.ts
-import { getText } from '@your-scope/react-package-template';
+import { getText } from 'react-text-provider';
 
 function validate() {
     const errorMessage = getText('validation.error');
@@ -142,7 +142,7 @@ npm install yalc -g
 First, navigate to the project directory where you want to use this package and run:
 
 ```bash
-yalc add @your-scope/react-package-template
+yalc add react-text-provider
 ```
 
 This will install the package from the local Yalc store. You can now use it in the project as you would with any other npm package.
@@ -152,7 +152,7 @@ This will install the package from the local Yalc store. You can now use it in t
 After publishing changes to this package to the local Yalc store, navigate to the project directory and run:
 
 ```bash
-yalc update @your-scope/react-package-template
+yalc update react-text-provider
 ```
 
 This will update the installed version of this package in the project.

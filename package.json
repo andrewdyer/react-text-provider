@@ -1,6 +1,6 @@
 {
-    "name": "react-package-template",
-    "description": "A template for creating React packages",
+    "name": "react-text-provider",
+    "description": "A package for managing and accessing text strings throughout your application",
     "version": "1.0.0",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
