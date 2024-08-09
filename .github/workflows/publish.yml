@@ -6,7 +6,7 @@ on:
 
 jobs:
     build:
-        if: env.PUBLISH_ENABLED == 'true'
+        if: ${{ env.PUBLISH_ENABLED == 'true' }}
         runs-on: ubuntu-latest
         permissions:
             contents: read
