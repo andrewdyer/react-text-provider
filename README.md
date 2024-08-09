@@ -51,7 +51,7 @@ Then use the `useText` hook to retrieve text strings in your React components:
 ```tsx
 // App.tsx
 import React from 'react';
-import { useText } from 'react-feature-toggler';
+import { useText } from 'react-text-provider';
 
 function App() {
     const greeting = useText('greeting');
@@ -67,7 +67,7 @@ Alternatively, for components that render a lot of text you can use the `Text` c
 ```tsx
 // App.tsx
 import React from 'react';
-import { Text } from 'react-feature-toggler';
+import { Text } from 'react-text-provider';
 
 function App() {
     return (
