@@ -9,6 +9,6 @@ const Text: React.FC<TextProps> = ({ textKey }) => {
     const text = useText(textKey);
 
     return <React.Fragment>{text}</React.Fragment>;
-}
+};
 
 export default Text;
