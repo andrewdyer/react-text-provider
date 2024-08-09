@@ -2,6 +2,10 @@
 
 A package for managing and accessing text strings throughout your application.
 
+## License
+
+Licensed under MIT. Totally free for private or commercial projects.
+
 ## Getting Started
 
 To install this package use npm:
