@@ -1,5 +1,5 @@
 {
-    "name": "react-text-provider",
+    "name": "react-text-toolkit",
     "description": "A package for managing and accessing text strings throughout your application",
     "version": "1.0.2",
     "main": "dist/cjs/index.js",
@@ -29,7 +29,7 @@
     "author": "Andrew Dyer (https://github.com/andrewdyer)",
     "repository": {
         "type": "git",
-        "url": "https://github.com/andrewdyer/react-text-provider.git"
+        "url": "https://github.com/andrewdyer/react-text-toolkit.git"
     },
     "license": "MIT",
     "devDependencies": {
