@@ -6,7 +6,9 @@ type UseTextReturn = {
     t: (key: string) => string;
 };
 
-const useText = (key?: string): string | UseTextReturn => {
+function useText(): UseTextReturn;
+function useText(key: string): string;
+function useText(key?: string): string | UseTextReturn {
     const texts = React.useContext(TextContext);
 
     if (!texts) {
@@ -20,6 +22,6 @@ const useText = (key?: string): string | UseTextReturn => {
     }
 
     return { t: getText };
-};
+}
 
 export default useText;
