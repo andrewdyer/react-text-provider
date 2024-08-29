@@ -7,9 +7,11 @@ interface TextProps {
 }
 
 const Text: React.FC<TextProps> = ({ as: Component = React.Fragment, textKey }) => {
-    const text = useText(textKey);
+    const getText = useText();
 
-    return <Component>{text}</Component>;
+    const textValue = getText(textKey);
+
+    return <Component>{textValue}</Component>;
 };
 
 export default Text;

@@ -10,8 +10,11 @@ const texts = {
     }
 };
 const TestComponent: React.FC<{ keyToTest: string }> = ({ keyToTest }) => {
-    const text = useText(keyToTest);
-    return <div>{text}</div>;
+    const text = useText();
+
+    const label = text(keyToTest);
+
+    return <div>{label}</div>;
 };
 
 describe('TextProvider and useText', () => {
@@ -64,8 +67,11 @@ describe('TextProvider and useText', () => {
     test('should throw an error if useText is used outside of TextProvider', () => {
         const TestComponentWithoutProvider = () => {
             try {
-                const text = useText('greeting');
-                return <div>{text}</div>;
+                const text = useText();
+
+                const label = text('greeting');
+
+                return <div>{label}</div>;
             } catch (e) {
                 return <div>{(e as Error).message}</div>;
             }

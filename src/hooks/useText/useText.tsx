@@ -2,26 +2,18 @@ import React from 'react';
 import { TextContext } from '../../contexts';
 import { resolveText } from '../../utilities';
 
-type UseTextReturn = {
-    t: (key: string) => string;
-};
+type TextFunction = (key: string) => string;
 
-function useText(): UseTextReturn;
-function useText(key: string): string;
-function useText(key?: string): string | UseTextReturn {
-    const texts = React.useContext(TextContext);
+function useText(): TextFunction {
+    const context = React.useContext(TextContext);
 
-    if (!texts) {
+    if (!context) {
         throw new Error('useText must be used within a TextProvider');
     }
 
-    const getText = (k: string) => resolveText(texts, k);
-
-    if (key) {
-        return getText(key);
-    }
-
-    return { t: getText };
+    return (key: string) => {
+        return resolveText(context, key);
+    };
 }
 
 export default useText;
