@@ -50,9 +50,7 @@ root.render(
 );
 ```
 
-Then use the `useText` hook to retrieve text strings in your React components.
-
-You can use the `useText` hook in two different ways. You can retrieve a specific text string by passing the key directly to the `useText` hook:
+Then use the `useText` hook to retrieve text strings in your React components:
 
 ```tsx
 // App.tsx
@@ -60,30 +58,12 @@ import React from 'react';
 import { useText } from 'react-text-toolkit';
 
 function App() {
-    const greeting = useText('greeting');
-
-    return <h1>{greeting}</h1>;
-}
-
-export default App;
-```
-
-Or, if you have multiple text strings to retrieve, you can call `useText` hook without a key and use the returned `t` function.
-
-```tsx
-// App.tsx
-import React from 'react';
-import { useText } from 'react-text-toolkit';
-
-function App() {
-    const { t } = useText();
-    const greeting = t('greeting');
-    const welcomeMessage = t('welcome.message');
+    const text = useText();
 
     return (
         <div>
-            <h1>{greeting}</h1>
-            <p>{welcomeMessage}</p>
+            <h1>{text('greeting')}</h1>
+            <p>{text('welcome.message')}</p>
         </div>
     );
 }
