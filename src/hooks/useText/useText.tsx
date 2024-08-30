@@ -12,7 +12,7 @@ function useText(): TextFunction {
     }
 
     return (key: string) => {
-        return resolveText(context, key);
+        return resolveText(context.texts, key);
     };
 }
 

@@ -1,40 +1,44 @@
-import { initGlobalTexts, getText, resetGlobalTexts } from './getText';
+import { getText, initGlobalTexts, resetGlobalTexts, setGlobalLanguage } from './getText';
 
-describe('initGlobalTexts, resetGlobalTexts and getText', () => {
+describe('initGlobalTexts, setGlobalLanguage, resetGlobalTexts and getText', () => {
     const texts = {
-        greeting: 'Hello, World!',
-        welcome: {
-            message: 'Welcome to our application'
-        }
+        en: { greeting: 'Hello, World!' },
+        es: { greeting: '¡Hola, Mundo!' }
     };
 
-    beforeEach(() => {
+    afterEach(() => {
         resetGlobalTexts();
     });
 
-    test('should return the correct value after initialization', () => {
-        initGlobalTexts(texts);
+    test('should initialize and retrieve text in default language', () => {
+        initGlobalTexts(texts, 'en');
         expect(getText('greeting')).toBe('Hello, World!');
     });
 
-    test('should return the key if the text is not found', () => {
-        initGlobalTexts(texts);
-        expect(getText('nonexistent')).toBe('nonexistent');
+    test('should switch language and retrieve text in new language', () => {
+        initGlobalTexts(texts, 'en');
+        setGlobalLanguage('es');
+        expect(getText('greeting')).toBe('¡Hola, Mundo!');
     });
 
-    test('should return the correct value for a nested key', () => {
-        initGlobalTexts(texts);
-        expect(getText('welcome.message')).toBe('Welcome to our application');
+    test('should throw an error if texts are not initialized', () => {
+        expect(() => getText('greeting')).toThrow(
+            'getText: texts have not been initialized or language is not set'
+        );
     });
 
-    test('should return the key if the nested value is not found', () => {
-        initGlobalTexts(texts);
-        expect(getText('welcome.nonexistent')).toBe('welcome.nonexistent');
+    test('should throw an error if language is not supported', () => {
+        initGlobalTexts(texts, 'en');
+        expect(() => setGlobalLanguage('fr')).toThrow(
+            'setGlobalLanguage: language "fr" is not supported or texts are not initialized'
+        );
     });
 
-    test('should throw an error if getText is called before initGlobalTexts', () => {
-        expect(() => getText('welcome.message')).toThrow(
-            'getText: texts have not been initialized'
+    test('should throw an error if the language is not set', () => {
+        initGlobalTexts(texts, 'en');
+        resetGlobalTexts();
+        expect(() => getText('greeting')).toThrow(
+            'getText: texts have not been initialized or language is not set'
         );
     });
 });

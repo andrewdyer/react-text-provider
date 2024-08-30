@@ -4,11 +4,20 @@ import { useText } from '../../hooks';
 import TextProvider from './TextProvider';
 
 const texts = {
-    greeting: 'Hello, World!',
-    welcome: {
-        message: 'Welcome to our application'
+    en: {
+        greeting: 'Hello, World!',
+        welcome: {
+            message: 'Welcome to our application'
+        }
+    },
+    es: {
+        greeting: '¡Hola, Mundo!',
+        welcome: {
+            message: 'Bienvenido a nuestra aplicación'
+        }
     }
 };
+
 const TestComponent: React.FC<{ keyToTest: string }> = ({ keyToTest }) => {
     const text = useText();
 
@@ -18,7 +27,7 @@ const TestComponent: React.FC<{ keyToTest: string }> = ({ keyToTest }) => {
 };
 
 describe('TextProvider and useText', () => {
-    test('should provide the correct text value via context', () => {
+    test('should provide the correct text value via context in English', () => {
         render(
             <TextProvider texts={texts}>
                 <TestComponent keyToTest="greeting" />
@@ -27,13 +36,31 @@ describe('TextProvider and useText', () => {
         expect(screen.getByText('Hello, World!')).toBeInTheDocument();
     });
 
-    test('should provide the correct value for a nested key', () => {
+    test('should provide the correct text value via context in Spanish', () => {
+        render(
+            <TextProvider texts={texts} initialLanguage="es">
+                <TestComponent keyToTest="greeting" />
+            </TextProvider>
+        );
+        expect(screen.getByText('¡Hola, Mundo!')).toBeInTheDocument();
+    });
+
+    test('should provide the correct value for a nested key in English', () => {
         render(
             <TextProvider texts={texts}>
                 <TestComponent keyToTest="welcome.message" />
             </TextProvider>
         );
         expect(screen.getByText('Welcome to our application')).toBeInTheDocument();
+    });
+
+    test('should provide the correct value for a nested key in Spanish', () => {
+        render(
+            <TextProvider texts={texts} initialLanguage="es">
+                <TestComponent keyToTest="welcome.message" />
+            </TextProvider>
+        );
+        expect(screen.getByText('Bienvenido a nuestra aplicación')).toBeInTheDocument();
     });
 
     test('should warn and return the key if the text is not found in the context', () => {
@@ -62,6 +89,15 @@ describe('TextProvider and useText', () => {
         expect(consoleWarnSpy).toHaveBeenCalledWith('Text key "welcome.nonexistent" not found');
 
         consoleWarnSpy.mockRestore();
+    });
+
+    test('should return an empty object if the selected language does not exist in the texts', () => {
+        render(
+            <TextProvider texts={texts} initialLanguage="fr">
+                <TestComponent keyToTest="greeting" />
+            </TextProvider>
+        );
+        expect(screen.getByText('greeting')).toBeInTheDocument();
     });
 
     test('should throw an error if useText is used outside of TextProvider', () => {

@@ -18,21 +18,35 @@ npm install react-text-toolkit
 
 ### Define Your Texts
 
-First, define your text configuration in a separate file. This configuration will store all the text strings your app needs:
+First, define your text configuration in a separate file. This configuration will store all the text strings your app needs, organized by language:
 
 ```ts
 // texts.ts
 export const texts = {
-    greeting: 'Hello, World!',
-    welcome: {
-        message: 'Welcome to our application'
+    en: {
+        greeting: 'Hello, World!',
+        welcome: {
+            message: 'Welcome to our application'
+        },
+        validation: {
+            error: 'This field is required.'
+        }
+    },
+    es: {
+        greeting: '¡Hola, Mundo!',
+        welcome: {
+            message: 'Bienvenido a nuestra aplicación'
+        },
+        validation: {
+            error: 'Este campo es obligatorio.'
+        }
     }
 };
 ```
 
 ### Inside React Components
 
-Wrap your main application component with the `TextProvider` to make the texts available throughout your app:
+Wrap your main application component with the `TextProvider` to make the texts available throughout your app. You can specify an initial language, or it will default to the user’s browser language:
 
 ```tsx
 // index.tsx
@@ -71,7 +85,7 @@ function App() {
 export default App;
 ```
 
-Alternatively, for components that render a lot of text you can use the `Text` component to streamline the process:
+Alternatively, you can also use the `Text` component for a more streamlined way to render text:
 
 ```tsx
 // App.tsx
@@ -99,7 +113,7 @@ If you need to use texts outside of React components (e.g., in validation schema
 import { initGlobalTexts } from 'react-text-toolkit';
 import { texts } from './texts';
 
-initGlobalTexts(texts);
+initGlobalTexts(texts, 'en');
 ```
 
 Then, import this initialization in your entry file:
@@ -112,10 +126,7 @@ import './initializeTexts';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
-        <App />
-    document.getElementById('root')
-);
+root.render(<App />);
 ```
 
 Then to access text strings in non-React code (e.g., validation schemas, utility functions), use the `getText` helper function.
@@ -127,6 +138,28 @@ import { getText } from 'react-text-toolkit';
 function validate() {
     const errorMessage = getText('validation.error');
     // Use errorMessage in validation logic
+}
+```
+
+You can also switch the global language outside of React components using the `setGlobalLanguage` function:
+
+```ts
+// switchLanguage.ts
+import { setGlobalLanguage } from 'react-text-toolkit';
+
+function switchLanguageToSpanish() {
+    setGlobalLanguage('es');
+}
+```
+
+And if necessary, you can reset the global texts and language configuration:
+
+```ts
+// resetTexts.ts
+import { resetGlobalTexts } from 'react-text-toolkit';
+
+function reset() {
+    resetGlobalTexts();
 }
 ```
 

@@ -1,5 +1,10 @@
 import React from 'react';
 
-const TextContext = React.createContext<Record<string, any> | undefined>(undefined);
+interface TextContextType {
+    texts: Record<string, any>;
+    setLanguage: (language: string) => void;
+}
+
+const TextContext = React.createContext<TextContextType | undefined>(undefined);
 
 export default TextContext;
