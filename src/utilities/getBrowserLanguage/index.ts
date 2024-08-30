@@ -1,1 +1,1 @@
-export * from './getBrowserLanguage';
+export { default } from './getBrowserLanguage';
